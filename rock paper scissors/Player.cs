@@ -13,6 +13,7 @@ namespace rock_paper_scissors
         public string PlayerName { get; set; }
         public int Score { get; set; }
         Random r;
+        public Figure Fig { get; set; }
 
         public Player(bool isHuman, int playerID)
         {
@@ -23,8 +24,9 @@ namespace rock_paper_scissors
             r = new Random();
         }
 
-        public int ChooseFigure()
+        public void ChooseFigure()
         {
+            Figure fig = new Figure();
             int answer;
             if (IsHuman)
             {
@@ -40,7 +42,26 @@ namespace rock_paper_scissors
                 answer = r.Next(1, 4);
             }
 
-            return answer;
+            switch (answer)
+            {
+                case 1:
+                    fig = new Figure("rock");
+                    break;
+
+                case 2:
+                    fig = new Figure("paper");
+                    break;
+
+                case 3:
+                    fig = new Figure("scissors");
+                    break;
+
+                default:
+                    Console.WriteLine("Oops? (failed on choosing a figure)");
+                    break;
+            }
+
+            Fig = fig;
         }
 
         public void AddPoint()
